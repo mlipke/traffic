@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Traffic</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="traffic_message">Traffic used:</string>
+    <string name="refresh_button">Refresh</string>
+</resources>
