@@ -4,4 +4,11 @@
 
     <string name="traffic_message">Traffic used:</string>
     <string name="refresh_button">Refresh</string>
+
+    <string name="upload_label">Upload</string>
+    <string name="download_label">Download</string>
+    <string name="total_label">Total</string>
+    <string name="credit_label">Credit</string>
+
+    <string name="error_toast">Couldn\'t get traffic inforamtion</string>
 </resources>

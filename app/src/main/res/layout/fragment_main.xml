@@ -7,19 +7,15 @@
     tools:context=".MainActivity$PlaceholderFragment"
     android:id="@+id/main_layout">
 
-    <TextView android:text="@string/traffic_message" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="101dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/traffic_label" />
 
-    <TextView
+
+    <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/traffic_value"
-        android:layout_below="@+id/traffic_label"
+        class="com.somecomp.traffic.TrafficChartView"
+        android:id="@+id/trafficChartView"
+        android:layout_marginBottom="25dp"
+        android:layout_above="@+id/refresh_button"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -27,7 +23,16 @@
         android:layout_height="wrap_content"
         android:text="@string/refresh_button"
         android:id="@+id/refresh_button"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/info_layout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/include" />
+
 
 </RelativeLayout>

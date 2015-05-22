@@ -1,8 +1,9 @@
 package com.somecomp.traffic;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +13,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
@@ -53,36 +60,49 @@ public class MainActivity extends Activity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
+        public PlaceholderFragment() {}
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            final TextView trafficAmount = (TextView)rootView.findViewById(R.id.traffic_value);
-            Button refreshButton = (Button)rootView.findViewById(R.id.refresh_button);
+            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            final TrafficChartView chartView = (TrafficChartView)rootView.findViewById(R.id.trafficChartView);
+            final Button refreshButton = (Button)rootView.findViewById(R.id.refresh_button);
 
             requestTraffic();
 
             refreshButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    trafficAmount.setText("");
+                    requestTraffic();
+                }
+            });
 
-                    TrafficTask trafficTask = new TrafficTask(trafficAmount);
-                    trafficTask.execute();
+            chartView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                 }
             });
 
             return rootView;
         }
 
+        @Override
+        public void onStart() {
+            super.onStart();
+            requestTraffic();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            requestTraffic();
+        }
+
         private void requestTraffic() {
             if (getView() != null) {
-                final TextView trafficAmount = (TextView) getView().findViewById(R.id.traffic_value);
-                TrafficTask trafficTask = new TrafficTask(trafficAmount);
+                TrafficTask trafficTask = new TrafficTask(getView(), getActivity().getApplicationContext());
                 trafficTask.execute();
             }
         }
