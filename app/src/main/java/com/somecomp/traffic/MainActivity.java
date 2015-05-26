@@ -77,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
                     requestTraffic();
                 }
             });
-
             chartView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

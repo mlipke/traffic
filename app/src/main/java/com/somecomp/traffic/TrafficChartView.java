@@ -21,8 +21,6 @@ public class TrafficChartView extends View {
     private float uploadPercent;
     private float downloadPercent;
 
-    private float currentAngle;
-
     private void init() {
         uploadPaint = new Paint();
         uploadPaint.setStyle(Paint.Style.FILL);
@@ -36,8 +34,6 @@ public class TrafficChartView extends View {
 
         uploadPercent = 0.0f;
         downloadPercent = 0.0f;
-
-        currentAngle = 0.0f;
     }
 
     public TrafficChartView(Context context) {
@@ -78,16 +74,8 @@ public class TrafficChartView extends View {
 
         setRotation(-90.0f);
 
-        if (currentAngle < uploadAngle + downloadAngle) {
-            ValueAnimator animator = ValueAnimator.ofFloat(0f, uploadAngle + downloadAngle);
-
-        } else {
-            canvas.drawArc(0, 0, width, height, 0.0f, uploadAngle, true, uploadPaint);
-            canvas.drawArc(0, 0, width, height, uploadAngle, downloadAngle, true, downloadPaint);
-        }
-
-//        canvas.drawArc(0, 0, width, height, 0.0f, uploadAngle, true, uploadPaint);
-//        canvas.drawArc(0, 0, width, height, uploadAngle, downloadAngle, true, downloadPaint);
+        canvas.drawArc(0, 0, width, height, 0.0f, uploadAngle, true, uploadPaint);
+        canvas.drawArc(0, 0, width, height, uploadAngle, downloadAngle, true, downloadPaint);
     }
 
     public void setPercentages(float upload, float download) {
