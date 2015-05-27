@@ -10,5 +10,5 @@
     <string name="total_label">Total</string>
     <string name="credit_label">Credit</string>
 
-    <string name="error_toast">Couldn\'t get traffic inforamtion</string>
+    <string name="error_toast">Couldn\'t get traffic information</string>
 </resources>
