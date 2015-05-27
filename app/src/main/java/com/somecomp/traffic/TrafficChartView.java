@@ -56,10 +56,12 @@ public class TrafficChartView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int height = 800;
-        int width = 800;
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
 
-        setMeasuredDimension(width, height);
+        int size = width > height ? height : width;
+
+        setMeasuredDimension(size, size);
     }
 
     @Override
