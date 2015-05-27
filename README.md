@@ -5,4 +5,4 @@ students dormitories Zellescher Weg 41-41d and all of the Wundstraße dormitorie
 
 #Screenshot(s)
 
-![Current Traffic](./screenshots/curr_traffic.jpg)
+![Current Traffic](./screenshots/curr_traffic.png)
