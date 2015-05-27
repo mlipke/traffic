@@ -2,6 +2,8 @@ package com.somecomp.traffic;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,10 +23,13 @@ public class TrafficRequest {
 
     private Context context;
 
+    private SwipeRefreshLayout refreshLayout;
+
     private TextView uploadAmount;
     private TextView downloadAmount;
     private TextView totalAmount;
     private TextView creditAmount;
+
     private TrafficChartView chartView;
 
     private double totalTraffic;
@@ -34,6 +39,7 @@ public class TrafficRequest {
 
     public TrafficRequest(View view, Context context) {
         this.context = context;
+        refreshLayout = (SwipeRefreshLayout)view;
 
         uploadAmount = (TextView)view.findViewById(R.id.upload_amount);
         downloadAmount = (TextView)view.findViewById(R.id.download_amount);
@@ -44,6 +50,8 @@ public class TrafficRequest {
     }
 
     protected Void execute() {
+        refreshLayout.setRefreshing(true);
+
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, Constants.WU_TRAFFIC_SITE_URL, null,
                 new Response.Listener<JSONObject>() {
@@ -86,10 +94,24 @@ public class TrafficRequest {
         float downloadPercent = (float)downloadTraffic / 30.72f;
 
         chartView.setPercentages(uploadPercent, downloadPercent);
+
+        stopLoadingIndicator();
     }
 
     private void failure() {
+        stopLoadingIndicator();
+
         Toast toast = Toast.makeText(context, context.getResources().getString(R.string.error_toast), Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private void stopLoadingIndicator() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(false);
+            }
+        }, 500);
     }
 }

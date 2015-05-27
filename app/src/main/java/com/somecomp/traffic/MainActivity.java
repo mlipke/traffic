@@ -3,6 +3,7 @@ package com.somecomp.traffic;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -65,11 +66,21 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            final TrafficChartView chartView = (TrafficChartView)rootView.findViewById(R.id.trafficChartView);
-            final Button refreshButton = (Button)rootView.findViewById(R.id.refresh_button);
+            final View view = inflater.inflate(R.layout.refresh_main_layout, container, false);
+            final TrafficChartView chartView = (TrafficChartView)view.findViewById(R.id.trafficChartView);
+            final Button refreshButton = (Button)view.findViewById(R.id.refresh_button);
+
+            SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout)view;
+            refreshLayout.setScrollBarDefaultDelayBeforeFade(500);
 
             requestTraffic();
+
+            refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    requestTraffic();
+                }
+            });
 
             refreshButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
                     requestTraffic();
                 }
             });
+
             chartView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -88,7 +100,7 @@ public class MainActivity extends ActionBarActivity {
                 chartView.setVisibility(View.GONE);
             }
 
-            return rootView;
+            return view;
         }
 
         @Override
