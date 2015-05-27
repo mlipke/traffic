@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -101,8 +100,8 @@ public class MainActivity extends ActionBarActivity {
 
         private void requestTraffic() {
             if (getView() != null) {
-                TrafficTask trafficTask = new TrafficTask(getView(), getActivity().getApplicationContext());
-                trafficTask.execute();
+                TrafficRequest trafficRequest = new TrafficRequest(getView(), getActivity().getApplicationContext());
+                trafficRequest.execute();
             }
         }
     }
