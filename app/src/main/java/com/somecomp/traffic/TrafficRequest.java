@@ -39,7 +39,7 @@ public class TrafficRequest {
 
     public TrafficRequest(View view, Context context) {
         this.context = context;
-        refreshLayout = (SwipeRefreshLayout)view;
+        refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
 
         uploadAmount = (TextView)view.findViewById(R.id.upload_amount);
         downloadAmount = (TextView)view.findViewById(R.id.download_amount);
@@ -112,6 +112,6 @@ public class TrafficRequest {
             public void run() {
                 refreshLayout.setRefreshing(false);
             }
-        }, 500);
+        }, 700);
     }
 }

@@ -70,8 +70,7 @@ public class MainActivity extends ActionBarActivity {
             final TrafficChartView chartView = (TrafficChartView)view.findViewById(R.id.trafficChartView);
             final Button refreshButton = (Button)view.findViewById(R.id.refresh_button);
 
-            SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout)view;
-            refreshLayout.setScrollBarDefaultDelayBeforeFade(500);
+            SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
 
             requestTraffic();
 
