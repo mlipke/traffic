@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -90,8 +91,10 @@ public class TrafficChartView extends View {
 
         setRotation(-90.0f);
 
-        canvas.drawArc(0, 0, width, height, 0.0f, uploadAngle, true, uploadPaint);
-        canvas.drawArc(0, 0, width, height, uploadAngle, downloadAngle, true, downloadPaint);
+        RectF oval = new RectF(0, 0, width, height);
+
+        canvas.drawArc(oval, 0.0f, uploadAngle, true, uploadPaint);
+        canvas.drawArc(oval, uploadAngle, downloadAngle, true, downloadPaint);
     }
 
 }
