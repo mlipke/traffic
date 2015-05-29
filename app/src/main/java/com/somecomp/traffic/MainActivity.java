@@ -97,10 +97,6 @@ public class MainActivity extends ActionBarActivity {
                 }
             });
 
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                chartView.setVisibility(View.GONE);
-            }
-
             return view;
         }
 

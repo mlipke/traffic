@@ -1,19 +1,16 @@
 package com.somecomp.traffic;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.drawable.shapes.ArcShape;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TrafficChartView extends View {
+
+    private float minHeight;
 
     private Paint uploadPaint;
     private Paint downloadPaint;
@@ -45,11 +42,14 @@ public class TrafficChartView extends View {
     public TrafficChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        init();
-    }
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TrafficChartView, 0, 0);
 
-    public TrafficChartView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        try {
+            minHeight = a.getDimension(R.styleable.TrafficChartView_minHeight, metrics.density);
+        } finally {
+            a.recycle();
+        }
 
         init();
     }
@@ -68,6 +68,20 @@ public class TrafficChartView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        int height = getHeight();
+
+        if (height >= minHeight)
+            doDraw(canvas);
+    }
+
+    public void setPercentages(float upload, float download) {
+        uploadPercent = upload;
+        downloadPercent = download;
+
+        invalidate();
+    }
+
+    private void doDraw(Canvas canvas) {
         int width = getWidth();
         int height = getHeight();
 
@@ -78,13 +92,6 @@ public class TrafficChartView extends View {
 
         canvas.drawArc(0, 0, width, height, 0.0f, uploadAngle, true, uploadPaint);
         canvas.drawArc(0, 0, width, height, uploadAngle, downloadAngle, true, downloadPaint);
-    }
-
-    public void setPercentages(float upload, float download) {
-        uploadPercent = upload;
-        downloadPercent = download;
-
-        invalidate();
     }
 
 }
