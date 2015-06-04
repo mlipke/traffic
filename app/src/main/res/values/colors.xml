@@ -5,5 +5,6 @@
 
     <color name="upload">#2196F3</color>
     <color name="download">#43A047</color>
+    <color name="is_free">#ffcbc7c9</color>
 
 </resources>

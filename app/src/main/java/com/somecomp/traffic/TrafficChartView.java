@@ -17,6 +17,7 @@ public class TrafficChartView extends View {
 
     private Paint uploadPaint;
     private Paint downloadPaint;
+    private Paint isFreePaint;
 
     private float uploadPercent;
     private float downloadPercent;
@@ -31,6 +32,11 @@ public class TrafficChartView extends View {
         downloadPaint.setStyle(Paint.Style.FILL);
         downloadPaint.setAntiAlias(true);
         downloadPaint.setColor(getResources().getColor(R.color.download));
+
+        isFreePaint = new Paint();
+        isFreePaint.setStyle(Paint.Style.FILL);
+        isFreePaint.setAntiAlias(true);
+        isFreePaint.setColor(getResources().getColor(R.color.is_free));
 
         uploadPercent = 0.0f;
         downloadPercent = 0.0f;
@@ -69,13 +75,15 @@ public class TrafficChartView extends View {
         int width = getWidth();
         int height = getHeight();
 
-        float uploadAngle = uploadPercent * 3.6f;
-        float downloadAngle = downloadPercent * 3.6f;
+        float uploadAngle = uploadPercent * 360.0f;
+        float downloadAngle = downloadPercent * 360.0f;
+        float nonFreeAngle = (uploadPercent + downloadPercent) * 360.0f;
 
         setRotation(-90.0f);
 
         canvas.drawArc(0, 0, width, height, 0.0f, uploadAngle, true, uploadPaint);
         canvas.drawArc(0, 0, width, height, uploadAngle, downloadAngle, true, downloadPaint);
+        canvas.drawArc(0, 0, width, height, nonFreeAngle, 360.0f - nonFreeAngle, true, isFreePaint);
     }
 
     public void setPercentages(float upload, float download) {

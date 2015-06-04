@@ -96,8 +96,8 @@ public class TrafficTask extends AsyncTask<Void, Void, Void> {
         totalAmount.setText(totalTraffic);
         creditAmount.setText(creditTraffic);
 
-        float uploadPercent = TrafficUnitParser.parse(uploadTraffic) / 30.72f;
-        float downloadPercent = TrafficUnitParser.parse(downloadTraffic) / 30.72f;
+        float uploadPercent = TrafficUnitParser.parse(uploadTraffic) / TrafficUnitParser.parse(creditTraffic);
+        float downloadPercent = TrafficUnitParser.parse(downloadTraffic) / TrafficUnitParser.parse(creditTraffic);
 
         chartView.setPercentages(uploadPercent, downloadPercent);
     }
