@@ -6,5 +6,6 @@
         android:dialogTitle="@string/pref_graph"
         android:entries="@array/graph_types_desc"
         android:entryValues="@array/graph_types"
+        android:summary="%s"
         android:defaultValue="@string/pref_graph_daily_val" />
 </PreferenceScreen>
