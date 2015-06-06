@@ -1,15 +1,20 @@
 package com.somecomp.traffic;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.preference.PreferenceManager;
+import android.support.v4.preference.PreferenceManagerCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 
 public class TrafficChartView extends View {
+
+    private SharedPreferences preferences;
 
     private float minHeight;
 
@@ -19,7 +24,9 @@ public class TrafficChartView extends View {
     private float uploadPercent;
     private float downloadPercent;
 
-    private void init() {
+    private void init(Context context) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
         uploadPaint = new Paint();
         uploadPaint.setStyle(Paint.Style.FILL);
         uploadPaint.setAntiAlias(true);
@@ -37,7 +44,7 @@ public class TrafficChartView extends View {
     public TrafficChartView(Context context) {
         super(context);
 
-        init();
+        init(context);
     }
 
     public TrafficChartView(Context context, AttributeSet attrs) {
@@ -52,7 +59,7 @@ public class TrafficChartView extends View {
             a.recycle();
         }
 
-        init();
+        init(context);
     }
 
     @Override
@@ -83,18 +90,24 @@ public class TrafficChartView extends View {
     }
 
     private void doDraw(Canvas canvas) {
+        String graph_style = preferences.getString(getResources().getString(R.string.pref_graph_key), "");
+
         int width = getWidth();
         int height = getHeight();
 
-        float uploadAngle = uploadPercent * 3.6f;
-        float downloadAngle = downloadPercent * 3.6f;
+        if (graph_style != null) {
+            if (graph_style.equals(getResources().getString(R.string.pref_graph_daily_val))) {
+                float uploadAngle = uploadPercent * 3.6f;
+                float downloadAngle = downloadPercent * 3.6f;
 
-        setRotation(-90.0f);
+                setRotation(-90.0f);
 
-        RectF oval = new RectF(0, 0, width, height);
+                RectF oval = new RectF(0, 0, width, height);
 
-        canvas.drawArc(oval, 0.0f, uploadAngle, true, uploadPaint);
-        canvas.drawArc(oval, uploadAngle, downloadAngle, true, downloadPaint);
+                canvas.drawArc(oval, 0.0f, uploadAngle, true, uploadPaint);
+                canvas.drawArc(oval, uploadAngle, downloadAngle, true, downloadPaint);
+            }
+        }
     }
 
 }
