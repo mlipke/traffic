@@ -1,8 +1,10 @@
 package com.somecomp.traffic;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import org.json.JSONObject;
 public class TrafficRequest {
 
     private Context context;
+    private SharedPreferences preferences;
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -39,6 +42,9 @@ public class TrafficRequest {
 
     public TrafficRequest(View view, Context context) {
         this.context = context;
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
         refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
 
         uploadAmount = (TextView)view.findViewById(R.id.upload_amount);
@@ -85,6 +91,8 @@ public class TrafficRequest {
     }
 
     private void success() {
+        String graph_style = preferences.getString(context.getResources().getString(R.string.pref_graph_key), "");
+
         uploadAmount.setText(TrafficUnits.getString(uploadTraffic));
         downloadAmount.setText(TrafficUnits.getString(downloadTraffic));
         totalAmount.setText(TrafficUnits.getString(totalTraffic));
@@ -92,6 +100,16 @@ public class TrafficRequest {
 
         float uploadPercent = (float)uploadTraffic / 30.72f;
         float downloadPercent = (float)downloadTraffic / 30.72f;
+
+        if (graph_style != null) {
+            if (graph_style.equals(context.getResources().getString(R.string.pref_graph_daily_val))) {
+                uploadPercent = (float) uploadTraffic / 30.72f;
+                downloadPercent = (float) downloadTraffic / 30.72f;
+            } else if (graph_style.equals(context.getResources().getString(R.string.pref_graph_all_val))) {
+                uploadPercent = (float) uploadTraffic / (float) creditTraffic;
+                downloadPercent = (float) downloadTraffic / (float) creditTraffic;
+            }
+        }
 
         chartView.setPercentages(uploadPercent, downloadPercent);
 
