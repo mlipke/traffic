@@ -12,7 +12,9 @@
 
     <string name="error_toast">Couldn\'t get traffic information</string>
 
-    <string name="pref_graph">Graph type</string>
+    <string name="pref_graph">Graph</string>
+    <string name="pref_graph_daily_summary">Show today's traffic</string>
+    <string name="pref_graph_all_summary">Show all traffic</string>
     <string name="pref_graph_key">pref_graph_style</string>
     <string name="pref_graph_daily_desc">Daily traffic</string>
     <string name="pref_graph_all_desc">All traffic</string>
