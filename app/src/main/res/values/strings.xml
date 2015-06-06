@@ -11,4 +11,10 @@
     <string name="credit_label">Credit</string>
 
     <string name="error_toast">Couldn\'t get traffic information</string>
+
+    <string name="pref_graph">Graph type</string>
+    <string name="pref_graph_daily_desc">Daily traffic</string>
+    <string name="pref_graph_all_desc">All traffic</string>
+    <string name="pref_graph_daily_val">graph_daily</string>
+    <string name="pref_graph_all_val">graph_all</string>
 </resources>

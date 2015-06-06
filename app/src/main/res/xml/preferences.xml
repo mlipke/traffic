@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="pref_graph_style"
+        android:title="@string/pref_graph"
+        android:dialogTitle="@string/pref_graph"
+        android:entries="@array/graph_types_desc"
+        android:entryValues="@array/graph_types"
+        android:defaultValue="@string/pref_graph_daily_val" />
+</PreferenceScreen>

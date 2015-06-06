@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="graph_types_desc">
+        <item>@string/pref_graph_daily_desc</item>
+        <item>@string/pref_graph_all_desc</item>
+    </string-array>
+
+    <string-array name="graph_types">
+        <item>@string/pref_graph_daily_val</item>
+        <item>@string/pref_graph_all_val</item>
+    </string-array>
+
+</resources>
