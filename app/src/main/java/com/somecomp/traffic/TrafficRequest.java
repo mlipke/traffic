@@ -75,13 +75,14 @@ public class TrafficRequest {
 
                             success();
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            failure(context.getResources().getString(R.string.error_no_traffic));
                         }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        failure();
+                        volleyError.printStackTrace();
+                        failure(context.getResources().getString(R.string.error_not_connected));
                     }
                 });
 
@@ -116,10 +117,10 @@ public class TrafficRequest {
         stopLoadingIndicator();
     }
 
-    private void failure() {
+    private void failure(String message) {
         stopLoadingIndicator();
 
-        Toast toast = Toast.makeText(context, context.getResources().getString(R.string.error_toast), Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.show();
     }
 

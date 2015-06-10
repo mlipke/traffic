@@ -11,6 +11,8 @@
     <string name="credit_label">Credit</string>
 
     <string name="error_toast">Couldn\'t get traffic information</string>
+    <string name="error_not_connected">Not connected</string>
+    <string name="error_no_traffic">Not connected to an AG DSN Network</string>
 
     <string name="pref_graph">Graph</string>
     <string name="pref_graph_key">pref_graph_style</string>
