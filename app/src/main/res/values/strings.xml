@@ -20,4 +20,19 @@
     <string name="pref_graph_all">Show all traffic</string>
     <string name="pref_graph_daily_val">graph_daily</string>
     <string name="pref_graph_all_val">graph_all</string>
+
+    <string name="pref_dorm_key">pref_dorm_name</string>
+    <string name="pref_dorm">Dormitory</string>
+
+    <string name="dorm_wu">Wundtstraße</string>
+    <string name="dorm_hss">Hochschulstraße</string>
+    <string name="dorm_bor">Borsbergstraße</string>
+    <string name="dorm_ger">Gerokstraße</string>
+    <string name="dorm_zeu">Zeunerstraße</string>
+
+    <string name="dorm_val_wu">https://www.wh2.tu-dresden.de/traffic/getMyTraffic.php</string>
+    <string name="dorm_val_hss">https://wh12.tu-dresden.de/tom.addon2.php</string>
+    <string name="dorm_val_bor">http://wh10.tu-dresden.de/phpskripte/getMyTraffic.php</string>
+    <string name="dorm_val_ger">http://www.wh17.tu-dresden.de/traffic/prozent</string>
+    <string name="dorm_val_zeu">http://zeus.wh25.tu-dresden.de/traffic.php</string>
 </resources>

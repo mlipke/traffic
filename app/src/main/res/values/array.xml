@@ -10,4 +10,20 @@
         <item>@string/pref_graph_all_val</item>
     </string-array>
 
+    <string-array name="dorm_names">
+        <item>@string/dorm_wu</item>
+        <item>@string/dorm_hss</item>
+        <item>@string/dorm_bor</item>
+        <item>@string/dorm_ger</item>
+        <item>@string/dorm_zeu</item>
+    </string-array>
+
+    <string-array name="dorm_values">
+        <item>@string/dorm_val_wu</item>
+        <item>@string/dorm_val_hss</item>
+        <item>@string/dorm_val_bor</item>
+        <item>@string/dorm_val_ger</item>
+        <item>@string/dorm_val_zeu</item>
+    </string-array>
+
 </resources>

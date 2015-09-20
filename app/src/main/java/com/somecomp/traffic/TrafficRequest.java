@@ -59,7 +59,8 @@ public class TrafficRequest {
         refreshLayout.setRefreshing(true);
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, Constants.WU_TRAFFIC_SITE_URL, null,
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET,
+                preferences.getString(context.getResources().getString(R.string.pref_dorm_key), ""), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject trafficData) {
