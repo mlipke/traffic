@@ -45,6 +45,7 @@ public class TrafficRequest {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
+
         refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
 
         uploadAmount = (TextView)view.findViewById(R.id.upload_amount);
