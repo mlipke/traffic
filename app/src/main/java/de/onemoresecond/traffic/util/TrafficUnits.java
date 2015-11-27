@@ -1,4 +1,4 @@
-package com.somecomp.traffic.util;
+package de.onemoresecond.traffic.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

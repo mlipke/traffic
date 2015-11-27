@@ -1,9 +1,9 @@
-package com.somecomp.traffic.fragments;
+package de.onemoresecond.traffic.fragments;
 
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;
 
-import com.somecomp.traffic.R;
+import de.onemoresecond.traffic.R;
 
 /**
  * Created by matt on 6/6/15.

@@ -1,4 +1,4 @@
-package com.somecomp.traffic.views;
+package de.onemoresecond.traffic.views;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-import com.somecomp.traffic.R;
+import de.onemoresecond.traffic.R;
 
 public class TrafficChartView extends View {
 

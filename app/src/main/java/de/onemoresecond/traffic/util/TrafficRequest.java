@@ -1,4 +1,4 @@
-package com.somecomp.traffic.util;
+package de.onemoresecond.traffic.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,9 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.somecomp.traffic.R;
-import com.somecomp.traffic.util.TrafficUnits;
-import com.somecomp.traffic.views.TrafficChartView;
+import de.onemoresecond.traffic.R;
+
+import de.onemoresecond.traffic.views.TrafficChartView;
 
 import org.json.JSONObject;
 

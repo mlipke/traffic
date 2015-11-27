@@ -1,4 +1,4 @@
-package com.somecomp.traffic;
+package de.onemoresecond.traffic;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

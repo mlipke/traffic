@@ -1,4 +1,4 @@
-package com.somecomp.traffic.util;
+package de.onemoresecond.traffic.util;
 
 /**
  * Created by matt on 27/11/15.

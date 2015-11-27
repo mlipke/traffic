@@ -1,4 +1,4 @@
-package com.somecomp.traffic.util;
+package de.onemoresecond.traffic.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

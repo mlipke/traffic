@@ -1,4 +1,4 @@
-package com.somecomp.traffic.activities;
+package de.onemoresecond.traffic.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -7,9 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.somecomp.traffic.R;
-import com.somecomp.traffic.fragments.SettingsFragment;
-import com.somecomp.traffic.fragments.TrafficFragment;
+import de.onemoresecond.traffic.R;
+import de.onemoresecond.traffic.fragments.SettingsFragment;
+import de.onemoresecond.traffic.fragments.TrafficFragment;
 
 
 public class MainActivity extends ActionBarActivity {
