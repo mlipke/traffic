@@ -15,16 +15,17 @@ import com.somecomp.traffic.util.DetectorListener;
 
 public class TrafficFragment extends Fragment {
 
-    public TrafficFragment() {}
+    public TrafficFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.refresh_main_layout, container, false);
-        final TrafficChartView chartView = (TrafficChartView)view.findViewById(R.id.trafficChartView);
-        final Button refreshButton = (Button)view.findViewById(R.id.refresh_button);
+        final TrafficChartView chartView = (TrafficChartView) view.findViewById(R.id.trafficChartView);
+        final Button refreshButton = (Button) view.findViewById(R.id.refresh_button);
 
-        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
+        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
 
         Detector detector = new Detector(getContext(), new DetectorListener() {
             @Override
@@ -36,7 +37,7 @@ public class TrafficFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (preferences.getBoolean("first_start", true)) {
             detector.detect();
-            preferences.edit().putBoolean("first_start", false);
+            preferences.edit().putBoolean("first_start", false).apply();
         } else {
             requestTraffic();
         }
