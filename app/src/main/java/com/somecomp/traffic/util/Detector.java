@@ -21,8 +21,11 @@ public class Detector {
     private Context context;
     private SharedPreferences preferences;
 
-    public Detector(Context context) {
+    private DetectorListener detectorListener;
+
+    public Detector(Context context, DetectorListener detectorListener) {
         this.context = context;
+        this.detectorListener = detectorListener;
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -44,6 +47,8 @@ public class Detector {
                                     preferences.edit()
                                             .putString("pref_dorm_name", traffic_url)
                                             .commit();
+                                    Log.d("Dormitory detected", traffic_url);
+                                    detectorListener.call();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

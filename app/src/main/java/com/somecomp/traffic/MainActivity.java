@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.somecomp.traffic.util.Detector;
+import com.somecomp.traffic.util.DetectorListener;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -38,9 +39,6 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-        Detector detector = new Detector(this);
-        detector.detect();
     }
 
 
@@ -85,7 +83,19 @@ public class MainActivity extends ActionBarActivity {
 
             SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
 
-            requestTraffic();
+            Detector detector = new Detector(getContext(), new DetectorListener() {
+                @Override
+                public void call() {
+                    requestTraffic();
+                }
+            });
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+            if (preferences.getBoolean("first_start", true)) {
+                detector.detect();
+            } else {
+                requestTraffic();
+            }
 
             refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -93,14 +103,12 @@ public class MainActivity extends ActionBarActivity {
                     requestTraffic();
                 }
             });
-
             refreshButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     requestTraffic();
                 }
             });
-
             chartView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
