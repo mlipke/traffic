@@ -1,4 +1,4 @@
-package com.somecomp.traffic;
+package com.somecomp.traffic.views;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,8 @@ import android.support.v4.preference.PreferenceManagerCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
+
+import com.somecomp.traffic.R;
 
 public class TrafficChartView extends View {
 

@@ -1,8 +1,7 @@
-package com.somecomp.traffic;
+package com.somecomp.traffic.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,8 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.somecomp.traffic.util.Constants;
+import com.somecomp.traffic.R;
 import com.somecomp.traffic.util.TrafficUnits;
+import com.somecomp.traffic.views.TrafficChartView;
 
 import org.json.JSONObject;
 
@@ -56,7 +56,7 @@ public class TrafficRequest {
         chartView = (TrafficChartView)view.findViewById(R.id.trafficChartView);
     }
 
-    protected Void execute() {
+    public void execute() {
         refreshLayout.setRefreshing(true);
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -89,8 +89,6 @@ public class TrafficRequest {
                 });
 
         queue.add(objectRequest);
-
-        return null;
     }
 
     private void success() {

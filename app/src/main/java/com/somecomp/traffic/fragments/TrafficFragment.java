@@ -1,4 +1,4 @@
-package com.somecomp.traffic;
+package com.somecomp.traffic.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.somecomp.traffic.R;
+import com.somecomp.traffic.util.TrafficRequest;
 import com.somecomp.traffic.util.Detector;
 import com.somecomp.traffic.util.DetectorListener;
+import com.somecomp.traffic.views.TrafficChartView;
 
 public class TrafficFragment extends Fragment {
 

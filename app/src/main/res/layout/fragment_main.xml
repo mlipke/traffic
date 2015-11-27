@@ -7,13 +7,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity$TrafficFragment"
+    tools:context=".activities.MainActivity$TrafficFragment"
     android:id="@+id/main_layout">
 
     <view
         android:layout_width="250dp"
         android:layout_height="250dp"
-        class="com.somecomp.traffic.TrafficChartView"
+        class="com.somecomp.traffic.views.TrafficChartView"
         android:id="@+id/trafficChartView"
         android:layout_below="@+id/include"
         android:layout_centerHorizontal="true"

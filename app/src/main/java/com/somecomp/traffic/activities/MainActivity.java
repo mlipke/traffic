@@ -1,4 +1,4 @@
-package com.somecomp.traffic;
+package com.somecomp.traffic.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -6,6 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.somecomp.traffic.R;
+import com.somecomp.traffic.fragments.SettingsFragment;
+import com.somecomp.traffic.fragments.TrafficFragment;
 
 
 public class MainActivity extends ActionBarActivity {
