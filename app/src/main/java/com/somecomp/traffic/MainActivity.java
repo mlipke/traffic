@@ -1,16 +1,12 @@
 package com.somecomp.traffic;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new TrafficFragment())
                     .commit();
         }
     }
@@ -67,75 +63,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {}
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            final View view = inflater.inflate(R.layout.refresh_main_layout, container, false);
-            final TrafficChartView chartView = (TrafficChartView)view.findViewById(R.id.trafficChartView);
-            final Button refreshButton = (Button)view.findViewById(R.id.refresh_button);
-
-            SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
-
-            Detector detector = new Detector(getContext(), new DetectorListener() {
-                @Override
-                public void call() {
-                    requestTraffic();
-                }
-            });
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-            if (preferences.getBoolean("first_start", true)) {
-                detector.detect();
-            } else {
-                requestTraffic();
-            }
-
-            refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    requestTraffic();
-                }
-            });
-            refreshButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    requestTraffic();
-                }
-            });
-            chartView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    requestTraffic();
-                }
-            });
-
-            return view;
-        }
-
-        @Override
-        public void onStart() {
-            super.onStart();
-            requestTraffic();
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            requestTraffic();
-        }
-
-        private void requestTraffic() {
-            if (getView() != null) {
-                TrafficRequest trafficRequest = new TrafficRequest(getView(), getActivity().getApplicationContext());
-                trafficRequest.execute();
-            }
-        }
-    }
 }
