@@ -36,6 +36,7 @@ public class TrafficFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (preferences.getBoolean("first_start", true)) {
             detector.detect();
+            preferences.edit().putBoolean("first_start", false);
         } else {
             requestTraffic();
         }
