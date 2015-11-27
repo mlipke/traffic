@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+    private Menu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -46,6 +49,7 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            showOverflowMenu(false);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new SettingsFragment())
                     .addToBackStack("settings")
@@ -53,6 +57,18 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        showOverflowMenu(true);
+    }
+
+    public void showOverflowMenu(boolean showMenu){
+        if(menu == null)
+            return;
+        menu.setGroupVisible(R.id.settings_group, showMenu);
     }
 
 }
