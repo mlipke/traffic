@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
