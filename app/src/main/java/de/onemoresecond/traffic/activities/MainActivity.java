@@ -2,7 +2,7 @@ package de.onemoresecond.traffic.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +12,7 @@ import de.onemoresecond.traffic.fragments.SettingsFragment;
 import de.onemoresecond.traffic.fragments.TrafficFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Menu menu;
 
