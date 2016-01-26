@@ -13,6 +13,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,7 +43,32 @@ public class TrafficService extends Service {
         TimerTask trafficCheck = new TimerTask() {
             @Override
             public void run() {
-                if (!preferences.getBoolean("NOTIFICATION_SHOWN", false)) {
+
+                SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+                Date today = Calendar.getInstance().getTime();
+                String todayString = fmt.format(today);
+                Date lastNotification = null;
+
+                try {
+                    lastNotification = fmt.parse(preferences.getString("LAST_NOTIFICATION_DATE", todayString));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("Date", "Today: " + todayString);
+                Log.d("Date", "Last Notification: " + lastNotification.toString());
+
+                if (lastNotification.compareTo(today) == -1) {
+                    Log.d("Date", "Smaller");
+                } else {
+                    Log.d("Date", "Bigger");
+                }
+
+                if (!preferences.getBoolean("NOTIFICATION_SHOWN", false)
+                     || lastNotification.compareTo(today) == -1) {
+
+                    preferences.edit().putBoolean("NOTIFICATION_SHOWN", false).apply();
+
                     TrafficRequest.requestTraffic(getApplicationContext(), new TrafficCallback() {
                         @Override
                         public void success(TrafficData data) {
