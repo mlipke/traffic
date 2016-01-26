@@ -55,15 +55,6 @@ public class TrafficService extends Service {
                     e.printStackTrace();
                 }
 
-                Log.d("Date", "Today: " + todayString);
-                Log.d("Date", "Last Notification: " + lastNotification.toString());
-
-                if (lastNotification.compareTo(today) == -1) {
-                    Log.d("Date", "Smaller");
-                } else {
-                    Log.d("Date", "Bigger");
-                }
-
                 if (!preferences.getBoolean("NOTIFICATION_SHOWN", false)
                      || lastNotification.compareTo(today) == -1) {
 
@@ -73,8 +64,6 @@ public class TrafficService extends Service {
                         @Override
                         public void success(TrafficData data) {
                             if (data.getTotalTraffic() / 30.72 > 0.1) {
-                                Log.d("Service", "90% Traffic");
-
                                 show_notification();
                             }
                         }
