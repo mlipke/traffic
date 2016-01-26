@@ -17,10 +17,8 @@ import org.json.JSONObject;
 
 public class TrafficRequest {
 
-    private SharedPreferences preferences;
-
-    public TrafficRequest(final Context context, final TrafficCallback callback) {
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public static void requestTraffic(final Context context, final TrafficCallback callback) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET,

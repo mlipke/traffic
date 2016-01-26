@@ -95,8 +95,7 @@ public class TrafficFragment extends Fragment {
 
     private void requestTraffic() {
         if (getView() != null) {
-            TrafficRequest trafficRequest =
-                    new TrafficRequest(getActivity().getApplicationContext(), callback);
+            TrafficRequest.requestTraffic(getActivity().getApplicationContext(), callback);
         }
     }
 

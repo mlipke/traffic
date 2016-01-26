@@ -1,5 +1,6 @@
 package de.onemoresecond.traffic.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import de.onemoresecond.traffic.R;
 import de.onemoresecond.traffic.fragments.SettingsFragment;
 import de.onemoresecond.traffic.fragments.TrafficFragment;
+import de.onemoresecond.traffic.services.TrafficService;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Intent serviceIntent = new Intent(this, TrafficService.class);
+        startService(serviceIntent);
     }
 
 
