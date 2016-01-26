@@ -1,5 +1,6 @@
 package de.onemoresecond.traffic.activities;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -33,12 +34,24 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.container, new TrafficFragment())
                     .commit();
         }
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new android.support.v4.app.FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    if (getSupportActionBar() != null)
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                } else {
+                    if (getSupportActionBar() != null)
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                }
+            }
+        });
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -46,12 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             showOverflowMenu(false);
             getSupportFragmentManager().beginTransaction()
@@ -69,10 +78,16 @@ public class MainActivity extends AppCompatActivity {
         showOverflowMenu(true);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        getSupportFragmentManager().popBackStack();
+        showOverflowMenu(true);
+        return true;
+    }
+
     public void showOverflowMenu(boolean showMenu){
         if(menu == null)
             return;
         menu.setGroupVisible(R.id.settings_group, showMenu);
     }
-
 }

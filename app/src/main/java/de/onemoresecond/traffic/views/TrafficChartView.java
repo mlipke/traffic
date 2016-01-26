@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.preference.PreferenceManager;
-import android.support.v4.preference.PreferenceManagerCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -103,7 +102,7 @@ public class TrafficChartView extends View {
         int width = getWidth();
         int height = getHeight();
 
-        if (graph_style != null) {
+        if (!graph_style.equals("")) {
             if (graph_style.equals(getResources().getString(R.string.pref_graph_daily_val))) {
                 float uploadAngle = uploadPercent * 3.6f;
                 float downloadAngle = downloadPercent * 3.6f;

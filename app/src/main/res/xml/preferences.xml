@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:key="@string/pref_graph_key"
-        android:title="@string/pref_graph"
-        android:dialogTitle="@string/pref_graph"
-        android:entries="@array/graph_types_desc"
-        android:entryValues="@array/graph_types"
-        android:summary="%s"
-        android:defaultValue="@string/pref_graph_daily_val" />
+    <PreferenceCategory
+        android:title="Gerneral">
+        <ListPreference
+            android:key="@string/pref_graph_key"
+            android:title="@string/pref_graph"
+            android:dialogTitle="@string/pref_graph"
+            android:entries="@array/graph_types_desc"
+            android:entryValues="@array/graph_types"
+            android:summary="%s"
+            android:defaultValue="@string/pref_graph_daily_val" />
 
-    <ListPreference
-        android:key="@string/pref_dorm_key"
-        android:title="@string/pref_dorm"
-        android:dialogTitle="@string/pref_dorm"
-        android:entries="@array/dorm_names"
-        android:entryValues="@array/dorm_values"
-        android:summary="%s"
-        android:defaultValue="@string/dorm_val_wu" />
+        <ListPreference
+            android:key="@string/pref_dorm_key"
+            android:title="@string/pref_dorm"
+            android:dialogTitle="@string/pref_dorm"
+            android:entries="@array/dorm_names"
+            android:entryValues="@array/dorm_values"
+            android:summary="%s"
+            android:defaultValue="@string/dorm_val_wu" />
+    </PreferenceCategory>
 </PreferenceScreen>
