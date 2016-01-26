@@ -72,6 +72,7 @@ public class TrafficService extends Service {
 
     private void show_notification() {
         Intent intent = new Intent(getApplicationContext(), TrafficNotificationReceiver.class);
+        intent.setAction("de.onemoresecond.Deleted");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
         NotificationCompat.Builder builder =

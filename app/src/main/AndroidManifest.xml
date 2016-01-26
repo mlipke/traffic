@@ -22,7 +22,17 @@
         <service
             android:name=".services.TrafficService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false">
+        </service>
+
+        <receiver
+            android:name=".util.TrafficNotificationReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="de.onemoresecond.Deleted" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
