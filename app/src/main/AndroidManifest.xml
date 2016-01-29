@@ -33,6 +33,16 @@
                 <action android:name="de.onemoresecond.Deleted" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".services.TrafficCheckReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="de.onemoresecond.Check" />
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 </manifest>
