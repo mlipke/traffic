@@ -24,6 +24,9 @@
     <string name="pref_dorm_key">pref_dorm_name</string>
     <string name="pref_dorm">Dormitory</string>
 
+    <string name="pref_bg_on">Check traffic in background</string>
+    <string name="pref_bg_off">Don\'t check traffic in background</string>
+
     <string name="dorm_wu">Wundtstraße</string>
     <string name="dorm_hss">Hochschulstraße</string>
     <string name="dorm_bor">Borsbergstraße</string>

@@ -1,9 +1,6 @@
 package de.onemoresecond.traffic.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
@@ -12,12 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.Calendar;
-
 import de.onemoresecond.traffic.R;
 import de.onemoresecond.traffic.fragments.SettingsFragment;
 import de.onemoresecond.traffic.fragments.TrafficFragment;
-import de.onemoresecond.traffic.services.TrafficService;
+import de.onemoresecond.traffic.util.TrafficServiceControl;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -57,17 +52,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent serviceIntent = new Intent(this, TrafficService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, serviceIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 2);
-
-        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        manager.setInexactRepeating(AlarmManager.RTC, cal.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean("pref_use_service", false)) {
+            TrafficServiceControl.start(this);
+        }
     }
 
 
