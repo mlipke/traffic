@@ -1,6 +1,8 @@
 package de.onemoresecond.traffic.activities;
 
+import android.app.ActivityManager;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import de.onemoresecond.traffic.R;
 import de.onemoresecond.traffic.fragments.SettingsFragment;
 import de.onemoresecond.traffic.fragments.TrafficFragment;
+import de.onemoresecond.traffic.services.TrafficService;
 import de.onemoresecond.traffic.util.TrafficServiceControl;
 
 
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.getBoolean("pref_use_service", false)) {
+        if (preferences.getBoolean("pref_use_service", false) && !checkForService()) {
             TrafficServiceControl.start(this);
         }
     }
@@ -98,5 +101,16 @@ public class MainActivity extends AppCompatActivity {
         if(menu == null)
             return;
         menu.setGroupVisible(R.id.settings_group, showMenu);
+    }
+
+    public boolean checkForService() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo info: manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (TrafficService.class.getName().equals(info.service.getClassName())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
