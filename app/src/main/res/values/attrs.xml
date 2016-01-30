@@ -3,4 +3,9 @@
     <declare-styleable name="TrafficChartView">
         <attr name="minHeight" format="dimension" />
     </declare-styleable>
+    
+    <declare-styleable name="SliderPreference">
+        <attr name="minValue" format="dimension" />
+        <attr name="maxValue" format="dimension" />
+    </declare-styleable>
 </resources>

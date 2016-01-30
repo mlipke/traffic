@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Gerneral">
+        android:title="Gerneral Preferences">
         <ListPreference
             android:key="@string/pref_graph_key"
             android:title="@string/pref_graph"
@@ -20,11 +20,16 @@
             android:summary="%s"
             android:defaultValue="@string/dorm_val_wu" />
 
-        <SwitchPreferenceCompat
+        <SwitchPreference
             android:key="pref_use_service"
             android:title="Notifications"
             android:summaryOff="@string/pref_bg_off"
             android:summaryOn="@string/pref_bg_on"
             android:defaultValue="false" />
+
+        <de.onemoresecond.traffic.preferences.SliderPreference
+            android:key="pref_warn"
+            android:title="Warning"
+            android:defaultValue="90" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -2,8 +2,8 @@ package de.onemoresecond.traffic.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceFragmentCompat;
 
 import de.onemoresecond.traffic.R;
 import de.onemoresecond.traffic.util.TrafficServiceControl;
@@ -11,7 +11,7 @@ import de.onemoresecond.traffic.util.TrafficServiceControl;
 /**
  * Created by matt on 6/6/15.
  */
-public class SettingsFragment extends PreferenceFragmentCompat implements
+public class SettingsFragment extends PreferenceFragment implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
@@ -19,10 +19,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         super.onCreate(savedInstanceState);
         PreferenceManager.getDefaultSharedPreferences(getContext())
                 .registerOnSharedPreferenceChangeListener(this);
-    }
 
-    @Override
-    public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
     }
 

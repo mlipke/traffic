@@ -1,9 +1,9 @@
 package de.onemoresecond.traffic.activities;
 
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -32,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.container, new TrafficFragment())
                     .commit();
         }
 
-        getSupportFragmentManager().addOnBackStackChangedListener(
+        getFragmentManager().addOnBackStackChangedListener(
             new FragmentManager.OnBackStackChangedListener() {
 
             @Override
             public void onBackStackChanged() {
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                if (getFragmentManager().getBackStackEntryCount() > 0) {
                     if (getSupportActionBar() != null)
                         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 } else {
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_settings) {
             showOverflowMenu(false);
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .replace(R.id.container, new SettingsFragment())
                     .addToBackStack("settings")
                     .commit();
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        getSupportFragmentManager().popBackStack();
+        getFragmentManager().popBackStack();
         showOverflowMenu(true);
         return true;
     }
