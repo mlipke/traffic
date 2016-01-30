@@ -41,9 +41,11 @@ public class TrafficService extends Service {
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0,
                 trafficCheckIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        int interval = Integer.parseInt(preferences.getString("pref_interval", "5"));
+
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                1000 * 60, pendingIntent);
+                1000 * 60 * interval, pendingIntent);
 
         return START_STICKY;
     }
