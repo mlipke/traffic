@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -14,6 +16,7 @@ import de.onemoresecond.traffic.util.TrafficCallback;
 import de.onemoresecond.traffic.util.TrafficData;
 import de.onemoresecond.traffic.util.TrafficNotificationReceiver;
 import de.onemoresecond.traffic.util.TrafficRequest;
+import de.onemoresecond.traffic.util.TrafficUnits;
 
 /**
  * Created by matt on 29/01/16.
@@ -21,7 +24,7 @@ import de.onemoresecond.traffic.util.TrafficRequest;
 public class TrafficCheckReceiver extends BroadcastReceiver {
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         Log.d("Receiver", "Received");
 
         final Context innerContext = context;
@@ -29,8 +32,13 @@ public class TrafficCheckReceiver extends BroadcastReceiver {
         TrafficRequest.requestTraffic(context, new TrafficCallback() {
             @Override
             public void success(TrafficData data) {
-                if (data.getTotalTraffic() / 30.72 > 0.1) {
-                    show_notification(innerContext);
+                SharedPreferences preferences =
+                        PreferenceManager.getDefaultSharedPreferences(context);
+
+                int threshold = preferences.getInt("pref_warn", 90);
+
+                if (data.getTotalTraffic() / 3072.0 > (threshold / 100.0)) {
+                    show_notification(innerContext, data.getTotalTraffic());
                 }
             }
 
@@ -41,15 +49,15 @@ public class TrafficCheckReceiver extends BroadcastReceiver {
         });
     }
 
-    private void show_notification(Context context) {
+    private void show_notification(Context context, double total) {
         Intent intent = new Intent(context, TrafficNotificationReceiver.class);
         intent.setAction("de.onemoresecond.Deleted");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context)
-                        .setContentTitle("90% Waring")
-                        .setContentText("You have used 90% of your traffic for today")
+                        .setContentTitle("Traffic usage warning")
+                        .setContentText("You have used " + TrafficUnits.getString(total) + " of your traffic")
                         .setSmallIcon(R.drawable.ic_warning_24dp)
                         .setAutoCancel(true)
                         .setDeleteIntent(pendingIntent)
