@@ -39,14 +39,14 @@ public class TrafficFragment extends Fragment {
 
         SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
 
-        Detector detector = new Detector(getContext(), new DetectorListener() {
+        Detector detector = new Detector(getActivity(), new DetectorListener() {
             @Override
             public void call() {
                 requestTraffic();
             }
         });
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (preferences.getBoolean("first_start", true)) {
             detector.detect();
             preferences.edit().putBoolean("first_start", false).apply();

@@ -17,7 +17,7 @@ public class SettingsFragment extends PreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceManager.getDefaultSharedPreferences(getContext())
+        PreferenceManager.getDefaultSharedPreferences(getActivity())
                 .registerOnSharedPreferenceChangeListener(this);
 
         addPreferencesFromResource(R.xml.preferences);
@@ -27,9 +27,9 @@ public class SettingsFragment extends PreferenceFragment implements
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals("pref_use_service")) {
             if (!sharedPreferences.getBoolean("pref_use_service", false)) {
-                TrafficServiceControl.start(getContext());
+                TrafficServiceControl.start(getActivity());
             } else {
-                TrafficServiceControl.stop(getContext());
+                TrafficServiceControl.stop(getActivity());
             }
         }
     }
